@@ -40,6 +40,7 @@ changelog:
 
 brews:
   - name: reviewreminder
+    directory: Formula
     repository:
       owner: evoteum
       name: homebrew-tap
