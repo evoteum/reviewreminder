@@ -1,0 +1,6 @@
+# Built binary
+/rr
+
+# Go
+*.test
+*.out

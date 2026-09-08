@@ -1,0 +1,45 @@
+# reviewreminder nudge messages
+#
+# Copy this file to ~/.reviewreminder/messages.yaml (running `rr init` creates it
+# for you) and edit it to taste. If the file is absent, reviewreminder falls back
+# to these as its built-in defaults.
+#
+# The message sent for a pull request is chosen by how many times it has already
+# been nudged: the 1st nudge uses message 1, the 2nd uses message 2, and so on.
+# Once a pull request has been nudged as many times as there are messages, the
+# last message is reused and the tone stops escalating — so define as many or as
+# few as you like.
+#
+# Each message is sent as the `message` field of the webhook payload, alongside
+# `pr_title` and `pr_url`, so the messages themselves do not need to name the PR.
+
+messages:
+  # 1 — first ask: polite and friendly
+  - "Hi! When you have a moment, could I please get a review on this pull request? Thanks a lot 🙏"
+
+  # 2 — gentle reminder
+  - "Just a gentle nudge — this pull request is still waiting for a review whenever someone has a spare few minutes."
+
+  # 3 — a little more direct
+  - "Following up on this one: it's still open and awaiting review. A quick look would be much appreciated."
+
+  # 4 — noting it's been a while
+  - "This pull request has been waiting a little while now. Could someone take a look when they get the chance?"
+
+  # 5 — flagging it's blocking progress
+  - "Still no review here, and this is starting to hold things up. Could I grab someone to review it today, please?"
+
+  # 6 — more insistent
+  - "Another day, still no review. This has been waiting a while — could someone please prioritise it?"
+
+  # 7 — clearly frustrated, still professional
+  - "This pull request has now been sitting unreviewed for several days. I'd really appreciate someone taking it on soon."
+
+  # 8 — pointed
+  - "Genuinely stuck waiting on this one. It's been open far too long — could someone please review it before end of day?"
+
+  # 9 — very frustrated but civil
+  - "This is getting silly now — well over a week with no review. Please, can someone take a look and unblock me?"
+
+  # 10 — final, exasperated but workplace-appropriate
+  - "It has been nearly two weeks and this pull request STILL hasn't had a review. Please, for the love of all that is holy, can someone review it? 😤"

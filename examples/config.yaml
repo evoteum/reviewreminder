@@ -1,0 +1,40 @@
+# reviewreminder configuration
+#
+# Copy this file to ~/.reviewreminder/config.yaml (running `rr init` creates it
+# for you) and edit the values below.
+#
+# This file holds no secrets, so it is safe to template with a tool like Ansible.
+# Your access token lives in a separate file (see token_file below).
+
+# The git forge that reviewreminder reads your pull requests from.
+forge:
+  # Forge type: "gitlab" or "github".
+  type: "gitlab"
+  # Base URL of your forge.
+  url: "https://git.example.com"
+  # Your username on the forge. Only pull requests you authored are nudged.
+  username: "your.username"
+  # Path to a file containing only your personal access token. `rr init` creates
+  # this file empty with chmod 600 — put your token in it yourself. rr never
+  # writes it, so the token can be placed on the machine out of band and need not
+  # pass through any automation.
+  token_file: "~/.reviewreminder/token"
+
+# The webhook that each nudge is sent to as an HTTP POST. The JSON payload
+# contains three fields: message, pr_title and pr_url.
+webhook_url: "https://example.com/your-webhook"
+
+# The minimum time between nudges for the same pull request. A newly discovered
+# pull request is nudged straight away; after that, rr waits at least this long
+# before nudging it again. This lets you run rr often (to pick up new pull
+# requests promptly) without over-nudging. Accepts durations like "4h" or "24h".
+nudge_interval: "24h"
+
+# Automatic runs. Scheduling is disabled by default, so nudges are only sent when
+# you run `rr` yourself. To run automatically, set enabled to true, provide a cron
+# expression, and run `rr` once to install the schedule. The expression is kept
+# even while disabled, so you can pause and resume without retyping it. Run often
+# — nudge_interval controls how frequently any one pull request is actually nudged.
+schedule:
+  enabled: false
+  expression: "*/15 * * * *"   # check every 15 minutes

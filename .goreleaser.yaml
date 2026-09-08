@@ -1,0 +1,55 @@
+# GoReleaser configuration. See https://goreleaser.com
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: rr
+    main: .
+    binary: rr
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+
+archives:
+  - id: rr
+    formats:
+      - tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^ci:"
+      - "^chore:"
+
+brews:
+  - name: reviewreminder
+    repository:
+      owner: evoteum
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    # Skip pushing the formula when no tap token is configured.
+    skip_upload: '{{ if eq .Env.HOMEBREW_TAP_TOKEN "" }}true{{ else }}false{{ end }}'
+    homepage: "https://github.com/evoteum/reviewreminder"
+    description: "Remind colleagues to review your code"
+    license: "AGPL-3.0"
+    install: |
+      bin.install "rr"
+    test: |
+      system "#{bin}/rr", "version"
