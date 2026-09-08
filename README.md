@@ -76,6 +76,9 @@ change how their team works: if you can't beat the process, automate it.
 
 - [Install](#install)
 - [Usage](#usage)
+    - [GitLab](#gitlab)
+    - [Nudge frequency](#nudge-frequency)
+    - [Scheduling](#scheduling)
 - [Documentation](#documentation)
 - [Repository Configuration](#repository-configuration)
 - [Contributing](#contributing)
